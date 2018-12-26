@@ -286,29 +286,25 @@ function generateRandomString($length = 10) {
 	$texto = $dados['message']['text']; //Usuário
 	
 	//Textos
-	$txt_start = "👋 Olá, bem-vindo. Este bot mostra se seu email ou sua senha apareceram em grandes vazamentos de dados, como Facebook, Linkedin e outros sites. \n\n
+	$txt_start = "👋 Olá, bem-vindo. Este bot mostra se seu email apareceu em grandes vazamentos de dados, como Facebook, Linkedin e outros sites. \n\n
 	✍️ Modo de uso:\n 
 	📧 /email meu@email.com\n
-	Ou\n
-	🔑 /senha minhasenhalegal123\n	
-	O bot irá consultar a base de dados do site https://haveibeenpwned.com, que agrega este dados e alerta usuários sobre vazamentos. Se tiver alguma dúvida, use os comandos /privacidade e /faq a qualquer momento 🙂";
+		O bot irá consultar a base de dados do site https://haveibeenpwned.com, que agrega este dados e alerta usuários sobre vazamentos. Se tiver alguma dúvida, use os comandos /privacidade e /faq a qualquer momento 🙂";
 	
 	$txt_privacidade = "
-		*O que este bot faz com o email e a senha que digito aqui?\n*
+		*O que este bot faz com o email que digito aqui?\n*
 		O que você informar aqui servirá unicamente para retornar se o dado está envolvido em vazamentos ou não. Os dados são consultados na base de dados do site https://haveibeenpwned.com e retornados a você. *Nada é repassado ou armazenado em lugar algum*. Você pode consultar o código do bot a qualquer momento em https://github.com/pedropamn/fuiexposto
 	";
 	$txt_faq = "
 	*◾️ Onde posso confirmar os dados que este bot retorna?*
 	R: De onde puxamos os dados, ou seja, no site https://haveibeenpwned.com
 	
-	*◾️ O bot diz que meu email e minha senha estavam em vazamentos. O que faço agora?*
+	*◾️ O bot diz que meu email estava em vazamentos. O que faço agora?*
 	R: O melhor a fazer é trocar sua senha que utilizava nos referidos serviços. Lembre-se de fazer isso periodicamente e não utilizar a mesma em vários serviços
 	
 	*◾️ Digitei meu email e o bot retornou os vazamentos. O bot recebe a senha que eu usava na época?*
 	R: Claro...QUE NÃO. Esta informação é confidencial e não cedida pelo haveibeenpwned a aplicativos de terceiros (como este bot)
-	
-	*◾️ O bot diz que minha senha consta em X vazamentos, mas não fala que senhas são essas...*
-	R: O bot não recebe esta informação quanto a senhas. Apenas se constam em vazamentos e em quantos.
+
 	
 	*◾️ Este bot possui código aberto?*
 	R: Claro! Você é livre para ver, sugerir mudanças e contribuir. Veja em https://github.com/pedropamn/fuiexposto
@@ -316,8 +312,8 @@ function generateRandomString($length = 10) {
 	
 	$txt_sobre = "
 		*Fui Exposto?*\n
-		_Bot para consulta de email ou senha em vazamentos de dados públicos via_ https://haveibeenpwned.com\n
-		Canal: @pamnnetwork\n
+		_Bot para consulta de email em vazamentos de dados públicos via_ https://haveibeenpwned.com\n
+		Siga o Canal @pamnnetwork para novidades 😁\n
 	";
 	
 	
@@ -387,18 +383,6 @@ function generateRandomString($length = 10) {
 			else{
 				sendChatAction($chat_id,'typing');
 				sendMessage($chat_id,"🤔 Ops... Houve um erro desconhecido. Tente novamente. Erro ".$ret_conn_mail['code'],"");
-			}
-			break;
-		case substr($texto,0,6) == "/senha":
-			$senha = substr($texto,7);
-			$pass = Conn_pass($senha);
-			if($pass != false){
-				sendChatAction($chat_id,'typing');
-				sendMessage($chat_id,"⚠️ Huuumm, isso não é bom... Esta senha consta em pelo menos ".substr($pass,0,1)." vazamentos... Ainda a utiliza? Troque-a imediatamente","");
-			}
-			else{
-				sendChatAction($chat_id,'typing');
-				sendMessage($chat_id,"✅ Boas notícias! Esta senha não consta em nenhum vazamento público! De qualquer forma, nunca utilize a mesma e troque-as periodicamente 😉","");
 			}
 			break;
 	}
