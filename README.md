@@ -8,3 +8,7 @@ Bot para Telegram que checa se determinado e-mail está contido em algum vazamen
 *  O arquivo ***broadcast.php*** envia mensagens para todos os usuários do banco de dados. Você pode utilizar {nome} e {sobrenome} para mensagens mais personalizadas
 
 * O arquivo ***check.php*** faz a checagem dos domínios cadastrados com as breaches do Have I Been Pwned. De preferência, configure um cron job para ele
+
+## Licença
+
+This project is licensed under the GNU General Public License
