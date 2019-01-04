@@ -14,12 +14,18 @@
 	
 	//Sobrenome
 	$sobrenome = $dados['message']['from']['last_name'];
-	
+	if(!$sobrenome){
+		$sobrenome = " ";
+		
+	}
 	//Obtém o chat_id 		
 	$chat_id = $dados['message']['from']['id']; 
 	
 	//Username
 	$username = $dados['message']['from']['username'];
+	if(!$username){
+		$username = " ";
+	}
 	
 	//Conteúdo
 	$texto = $dados['message']['text']; //Usuário
@@ -37,7 +43,7 @@
 	
 	#alerta linkedin.com
 	
-	Para visualizar seus alertas, envie apenas /alerta ou #alerta, para exibir apenas os alertas, sem esta mensagem
+	Para visualizar seus alertas, envie apenas /alertas ou #alerta, para exibir apenas os alertas, sem esta mensagem
 	
 	Se algum dos serviços que você inserir for afetado, você será notificado
 	
@@ -134,7 +140,7 @@
 			$ret_conn_mail = Conn_mail_curl($email);			
 			$msg_retorno = "";
 			if($ret_conn_mail['code'] == '200'){
-				$msg_retorno = "❗️ Ops... Este email consta em algum vazamento de dados...\n\n";
+				$msg_retorno = "❗️ Ops... Este email consta em algum vazamento de dados...\n\nOs resultados estarão em português quando disponível\n\n";
 				$num_reg = count($ret_conn_mail['json']);
 				$dec = json_decode($ret_conn_mail['json'],true);
 				foreach($dec as $dec){

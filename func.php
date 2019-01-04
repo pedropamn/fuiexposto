@@ -1,19 +1,19 @@
 ﻿<?php
 //Funções
-date_default_timezone_set('America/Sao_Paulo'); //Timezone
+date_default_timezone_set('America/Sao_Paulo');
 header("Content-type: text/html; charset=utf-8");
-define("API", "SUA_CHAVE_API"); //API Telegram
-define("MEU_ID", "SEU_TELEGRA_ID"); //ID para que o bot te envie em privado alguns eventos, como erro em banco de dados, etc
-define("USER_BROADCAST", "user"); //Usuário para broadcast
-define("PASS_BROADCAST", "senha"); //Senha para broadcast
+define("API", ""); //API Telegram
+define("MEU_ID", ""); //ID para que o bot te envie em privado alguns eventos, como erro em banco de dados, etc
+define("USER_BROADCAST", ""); //Usuário para broadcast
+define("PASS_BROADCAST", ""); //Senha para broadcast
  
 
 //Conexão com o DB
 function get_conn(){
-		$host = "host";
-		$user = "user";
-		$pass = "senha";
-		$db = "banco";	
+		$host = "";
+		$user = "";
+		$pass = "";
+		$db = "";	
 		
 		$conn = new mysqli($host, $user, $pass, $db);
 		return $conn;
@@ -226,8 +226,18 @@ function sendMessage($chat_id,$text,$id_reply){
  function translate_en_pt($txt){
 	 $txt = urlencode($txt);
 	 $json = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q={$txt}");
-	 $dec = json_decode($json,true);
-	 return $dec[0][0][0];
+	
+	 $response = $http_response_header[0];
+	 if($response != 'HTTP/1.0 200 OK'){
+		 sendMessage(MEU_ID,$response,"");
+		 return urldecode($txt);
+	 }
+	 else{
+		  $dec = json_decode($json,true);
+		  return $dec[0][0][0];
+		 
+	 }
+	 
  }
 
  //Conversão de formato de data
