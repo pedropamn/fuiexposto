@@ -390,7 +390,6 @@ function broadcast($txt){
 function check_alertas(){	
 	$json = file_get_contents('https://haveibeenpwned.com/api/v2/breaches');
 	
-	
 	$conn = get_conn();	
 	
 	$stmt = $conn->prepare("SELECT chat_id,dominio,data_cadastro FROM alertas");
@@ -399,7 +398,10 @@ function check_alertas(){
 	$stmt->bind_result($chat_id,$dominio,$data_cadastro);
 	$num_rows = $stmt->num_rows;
 	$decode = json_decode($json,true);
-	while($stmt->fetch()){
+	$alertas = [];
+	//Percorre cada alerta
+	while($stmt->fetch()){	
+		//Percorre cada nó do JSON
 		foreach($decode as $dec){
 			$dominio_breach = $dec['Domain'];
 			$data_breach = $dec['BreachDate'];
@@ -415,24 +417,35 @@ function check_alertas(){
 				if($dominio == $dominio_breach){
 					$msg = "⚠️ Opa! Parece que algo aconteceu com o domínio ".$dominio.", que você cadastrou! Veja abaixo detalhes do incidente:\n\n➖➖➖";
 					
-					
 					//$traducao = translate_en_pt($desc);
-					$msg .= "\n".translate_en_pt($desc)."Os dados vazados incluem ".translate_en_pt($dados_vazados)."\n\n➖➖➖\n\n👉 Seu e-mail estava envolvido? Envie-o para checar";
+					$msg .= "\n".translate_en_pt($desc);
+					$msg .= " Os dados vazados incluem ".translate_en_pt($dados_vazados)."\n\n➖➖➖\n\n👉 Seu e-mail estava envolvido? Envie-o aqui para checar";
 					sendMessage($chat_id,$msg,"");
 					sendMessage(MEU_ID,"Alerta enviado sobre o domínio ".$dominio."","");
 					
-					//Altera a data do alerta para a data de hoje
 					$hoje = date('Y-m-d');
-					$stmt = $conn->prepare("UPDATE alertas SET data_cadastro = ? WHERE dominio = ? AND chat_id = ?");
-					$stmt->bind_param('ssi',$hoje,$dominio,$chat_id);
-					$stmt->execute();
-					$stmt->store_result();
+					$alertas[] = array('new_data_cad' => $hoje,'dom' => $dominio, 'c_id' => $chat_id);
+							
 					
 				}
 			}
 		}
 		
 	}
+	
+	
+	foreach ($alertas as $al){
+		
+		$hoje = $al['new_data_cad'];
+		$dominio = $al['dom'];
+		$chat_id = $al['c_id'];
+		
+		$stmt = $conn->prepare("UPDATE alertas SET data_cadastro = ? WHERE dominio = ? AND chat_id = ?");
+		$stmt->bind_param('ssi',$hoje,$dominio,$chat_id);
+		$stmt->execute();
+		$stmt->store_result();
+	}
+	
 
 }
 
