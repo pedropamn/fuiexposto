@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width=150 />
+</p>
+
 # Fui exposto? (Telegram Bot)
 Bot para Telegram que checa se determinado e-mail está contido em algum vazamento de dados, via https://haveibeenpwned.com
 
