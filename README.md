@@ -7,7 +7,7 @@ Bot para Telegram que checa se determinado e-mail está contido em algum vazamen
 
 ## Uso
 
-*  Altere as variáveis no arquivo ***func.php*** (Banco de dados, chave de API, sua própria ID do Telegram (para receber alertas de uso, feedback, etc) e usuário e senha para o arquivo ***broadcast.php***
+*  Altere as variáveis no arquivo ***func.php*** (Banco de dados, chave de API, sua própria ID do Telegram - para receber alertas de uso, feedback, etc) e usuário e senha para o arquivo ***broadcast.php***
 
 *  O arquivo ***broadcast.php*** envia mensagens para todos os usuários do banco de dados. Você pode utilizar {nome} e {sobrenome} para mensagens mais personalizadas
 
