@@ -5,6 +5,9 @@
 # Fui exposto? (Telegram Bot)
 Bot para Telegram que checa se determinado e-mail está contido em algum vazamento de dados, via https://haveibeenpwned.com
 
+
+> Bot desenvolvido para a versão 2 da API (Não testado com a API v3). Agora, é necessário uma chave de API, obtida em https://haveibeenpwned.com/API/Key, além uma pequena adaptação na função ```Conn_mail_curl``` no arquivo ```func.php``` para que use a chave de API. Pull Requests são bem-vindos
+
 ## Uso
 
 *  Altere as variáveis no arquivo ***func.php*** (Banco de dados, chave de API, sua própria ID do Telegram - para receber alertas de uso, feedback, etc) e usuário e senha para o arquivo ***broadcast.php***
