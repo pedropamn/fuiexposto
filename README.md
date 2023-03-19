@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width=150 />
+  <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" width=150 /><br>
+  <img src="https://raw.githubusercontent.com/pedropamn/fuiexposto/master/fuiexposto.gif" width=600 />
 </p>
 
 # Fui exposto? (Telegram Bot)
