@@ -4,19 +4,18 @@
 </p>
 
 # Fui exposto? (Telegram Bot)
-Bot para Telegram que checa se determinado e-mail está contido em algum vazamento de dados, via https://haveibeenpwned.com
+Telegram bot that checks whether a given email is part of a data leak, via https://haveibeenpwned.com
 
+> Bot developed for version 2 of the API. Not tested with API v3 (only one currently supported). Now, an API key is required, obtained from https://haveibeenpwned.com/API/Key, in addition to a small adaptation in the ```Conn_mail_curl``` and ```check_alertas``` functions in ```func. php``` so that both use the key in the request
 
-> Bot desenvolvido para a versão 2 da API. Não testado com a API v3 (única aceita atualmente). Agora, é necessário uma chave de API, obtida em https://haveibeenpwned.com/API/Key, além uma pequena adaptação nas funções ```Conn_mail_curl``` e ```check_alertas``` em ```func.php``` para que ambas utilizem a chave na requisição
+## Usage
 
-## Uso
+* Change the variables in the ***func.php*** file (Database, API key, your own Telegram ID - to receive usage alerts, feedback, etc) and username and password for the  file ***broadcast.php***
 
-*  Altere as variáveis no arquivo ***func.php*** (Banco de dados, chave de API, sua própria ID do Telegram - para receber alertas de uso, feedback, etc) e usuário e senha para o arquivo ***broadcast.php***
+* The ***broadcast.php*** file sends messages to all database users. You can use {first name} and {last name} for more personalized messages
 
-*  O arquivo ***broadcast.php*** envia mensagens para todos os usuários do banco de dados. Você pode utilizar {nome} e {sobrenome} para mensagens mais personalizadas
+* The file ***check.php*** checks the domains registered with the Have I Been Pwned breaches. Preferably, set up a cron job for it
 
-* O arquivo ***check.php*** faz a checagem dos domínios cadastrados com as breaches do Have I Been Pwned. De preferência, configure um cron job para ele
-
-## Licença
+## License
 
 This project is licensed under the GNU General Public License
